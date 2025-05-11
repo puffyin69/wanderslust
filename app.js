@@ -420,10 +420,7 @@ app.delete(
     })
 );
 
-// Root route
-app.get("/", (req, res) => {
-    res.send("This is the root directory heheh");
-});
+
 
 // Catch-all route for undefined paths
 app.all("*", (req, res, next) => {
