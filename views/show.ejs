@@ -1,0 +1,84 @@
+<% layout("/layouts/boilerplate") -%>
+<head>
+  <link href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-sm p-4" style="border-radius: 20px;">
+                    <div class="text-center mb-3">
+                        <img src="<%= showlt.image && showlt.image.url ? showlt.image.url : '/default.jpg' %>" class="img-fluid rounded mb-2" style="max-width: 350px; max-height: 350px; object-fit: cover;" alt="Listing image">
+                    </div>
+                    <h3 class="mb-2" style="color:#444; font-weight:600; font-size:1.5rem;"><%= showlt.title %></h3>
+                    <p class="mb-1" style="color:#666;"><b>Location:</b>
+                        <%= showlt.location && typeof showlt.location === "object" && showlt.location.type
+                            ? showlt.location.type
+                            : showlt.location %>
+                    </p>
+                    <p class="mb-1" style="color:#666;"><b>Country:</b> <%= showlt.country %></p>
+                    <p class="mb-3" style="color:#666;"><b>Price:</b> ₹<%= showlt.price.toLocaleString("en-IN") %>/Night</p>
+                    <p class="mb-3" style="color:#555;"><%= showlt.description %></p>
+                    <div class="mb-3 d-flex gap-2">
+                        <a href="/listings/<%= showlt._id %>/edit" class="btn airbnb-btn px-4 py-2" style="font-size:0.98rem;">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                        </a>
+                        <form method="post" action="/listings/<%= showlt._id %>?_method=DELETE" class="d-inline">
+                            <button class="btn airbnb-btn px-4 py-2" style="font-size:0.98rem; color:#fe424d;">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-5">
+    <div class="col-6 offset-3">
+        <h4 class="mb-3" style="color:#444; font-weight:600;">Leave a Review</h4>
+        <form action="/listings/<%=showlt._id%>/reviews" method="post" novalidate class="needs-validation mb-4">
+            <div class="mb-3">
+                <label for="rating" class="form-label">Rating</label>
+                <input type="range" name="rating" min="1" max="5" class="form-range" id="rating">
+                <div class="invalid-feedback">
+                    Please provide a rating!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="comment" class="form-label">Comment</label>
+                <textarea name="comment" required class="form-control rounded-pill" id="comment" style="resize:none;"></textarea>
+                <div class="invalid-feedback">
+                    Please provide a comment!
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-2" style="font-size:1rem;">Submit</button>
+        </form>
+
+        <h5 class="mb-3" style="color:#444; font-weight:600;">All Reviews</h5>
+        <% if (showlt.reviews && showlt.reviews.length > 0) { %>
+            <div class="list-group">
+                <% showlt.reviews.forEach(review => { %>
+                    <div class="list-group-item mb-3 rounded shadow-sm border-0" style="background:#fafbfc;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-warning text-dark me-2" style="font-size:0.95rem;">
+                                    <i class="fa-solid fa-star"></i> <%= review.rating %>/5
+                                </span>
+                                <span style="color:#555; font-size:0.97rem;"><%= review.comment %></span>
+                            </div>
+                            <form method="post" action="/listings/<%=showlt._id%>/reviews/<%=review._id%>?_method=DELETE" class="d-inline">
+                                <button class="btn btn-outline-danger btn-sm px-3" style="border-radius:18px;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="text-muted mb-3">No reviews yet. Be the first to review!</div>
+        <% } %>
+    </div>
+</body>
+

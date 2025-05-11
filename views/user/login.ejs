@@ -1,0 +1,51 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow p-4" style="max-width: 400px; width: 100%; border-radius: 20px;">
+    <h3 class="mb-3 text-center" style="color:#444; font-weight:600; font-size:1.6rem;">Welcome back</h3>
+    <form action="/login" method="POST" class="needs-validation" novalidate autocomplete="off">
+      <div class="mb-3">
+        <label for="username" class="form-label fw-semibold" style="font-size:0.95rem;">Username</label>
+        <input type="text" class="form-control rounded-pill" id="username" name="username" required autocomplete="username">
+        <div class="invalid-feedback">
+          Please enter your username.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold" style="font-size:0.95rem;">Password</label>
+        <input type="password" class="form-control rounded-pill" id="password" name="password" required autocomplete="current-password">
+        <div class="invalid-feedback">
+          Please enter your password.
+        </div>
+      </div>
+      <button type="submit" class="btn airbnb-btn w-100 mt-2" style="font-size:1rem;">Login</button>
+      <div class="text-center mt-3" style="font-size:0.95rem;">
+        <span>Don't have an account? <a href="/signup" class="text-decoration-none" style="color:#fe424d;">Sign Up</a></span>
+      </div>
+    </form>
+  </div>
+</div>
+<style>
+  .airbnb-btn {
+    background: #fff;
+    color: #fe424d !important;
+    border: 1.2px solid #fe424d;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(254,66,77,0.05);
+    transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+  .airbnb-btn:hover, .airbnb-btn:focus {
+    background: #f8f8f8;
+    color: #fe424d !important;
+    border-color: #fe424d;
+    box-shadow: 0 4px 16px rgba(254,66,77,0.10);
+    text-decoration: none;
+  }
+  .card {
+    border: none;
+  }
+  .form-label {
+    color: #555;
+  }
+</style>

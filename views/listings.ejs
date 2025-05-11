@@ -1,0 +1,134 @@
+<% layout("/layouts/boilerplate") -%>
+<body>
+    <form id="categoryForm" action="/listings" method="POST" style="display:none;">
+        <input type="hidden" name="category" id="categoryInput">
+    </form>
+<div id="filters">
+    <div class="filter" data-category="Trending">
+        <a href="/listings/Trending">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Room">
+        <a href="/listings/Room">
+            <div><i class="fa-solid fa-hotel"></i></div>
+            <p>Room</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Beach">
+        <a href="/listings/Beach">
+            <div><i class="fa-solid fa-umbrella-beach"></i></div>
+            <p>Beach</p>
+        </a>
+    </div>
+    <div class="filter" data-category="iconic cities">
+        <a href="/listings/iconiccities">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>iconic cities</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Mountain">
+        <a href="/listings/Mountain">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountain</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Castles">
+        <a href="/listings/Castles">
+            <div><i class="fa-solid fa-chess-rook"></i></div>
+            <p>Castles</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Pools">
+        <a href="/listings/Pools">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Pools</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Camping">
+        <a href="/listings/Camping">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Bed and Breakfast">
+        <a href="/listings/BedandBreakfast">
+            <div><i class="fa-solid fa-mug-saucer"></i></div>
+            <p>Bed and Breakfast</p>
+        </a>
+    </div>
+    <div class="filter" data-category="New">
+        <a href="/listings/Newfilter">
+            <div><i class="fa-solid fa-key"></i></div>
+            <p>New</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Artic">
+        <a href="/listings/Artic">
+            <div><i class="fa-solid fa-snowflake"></i></div>
+            <p>Artic</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Chef's Kitchen">
+        <a href="/listings/Chef'sKitchen">
+            <div><i class="fa-solid fa-bowl-food"></i></div>
+            <p>Chef's Kitchen</p>
+        </a>
+    </div>
+    <div class="filter tax-toggle">
+        <div class="form-check form-switch tax-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Tax</label>
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <% if (listings && listings.length > 0) { %>
+                <% listings.forEach(listing => { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                             <a href="/listings/<%= listing._id %>">
+                                <img src="<%= listing.image && listing.image.url ? listing.image.url : '/default.jpg' %>" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Listing image"> 
+                            </a>
+                            <h5 class="card-title"><%= listing.title %></h5>
+                            <p class="card-text "><b>Price:</b> <i><%= listing.price.toLocaleString("en-IN")%>/Night</i>
+                             <i class="tax"> &nbsp;  +18% GST</i>
+                            </p>
+                            
+                            </div>
+                    </div>
+                <% }) %>
+            <% } else { %>  
+                <div class="col-12">
+                    <p>No listings found for this category.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+    <style>
+    .row > .col-md-4 {
+        margin-bottom: 0.5rem !important; /* Reduce vertical space between cards */
+    }
+    .card {
+        margin-bottom: 10px !important; /* Remove extra margin from card itself */
+    }
+</style>
+<script>
+    let taxSwitch = document.getElementById('switchCheckDefault');
+    taxSwitch.addEventListener("click",()=>{
+        let tax = document.getElementsByClassName("tax");
+        for(info of tax){
+            if(info.style.display!="inline"){
+                info.style.display="inline";
+            }else{
+                info.style.display="none";
+            }
+        }
+    })
+</script>
+
+

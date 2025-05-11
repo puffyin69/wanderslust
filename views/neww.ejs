@@ -1,0 +1,76 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow p-4" style="max-width: 500px; width: 100%; border-radius: 20px;">
+    <h3 class="mb-3 text-center" style="color:#444; font-weight:600; font-size:1.3rem;">Create a New Listing</h3>
+    <form action="/listings" method="POST" enctype="multipart/form-data" autocomplete="off">
+      <div class="mb-3">
+        <label for="title" class="form-label" style="font-size:0.95rem;">Title</label>
+        <input type="text" class="form-control rounded-pill" id="title" name="title" required>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label" style="font-size:0.95rem;">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label" style="font-size:0.95rem;">Price</label>
+        <input type="number" class="form-control rounded-pill" id="price" name="price" required>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label" style="font-size:0.95rem;">Location</label>
+        <input type="text" class="form-control rounded-pill" id="location" name="location" required>
+      </div>
+      <div class="mb-3">
+        <label for="country" class="form-label" style="font-size:0.95rem;">Country</label>
+        <input type="text" class="form-control rounded-pill" id="country" name="country" required>
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label" style="font-size:0.95rem;">Category</label>
+        <select class="form-select rounded-pill" id="category" name="category" required>
+          <option value="">Select a category</option>
+          <option value="Trending">Trending</option>
+          <option value="Room">Room</option>
+          <option value="Beach">Beach</option>
+          <option value="iconic cities">Iconic Cities</option>
+          <option value="Mountain">Mountain</option>
+          <option value="Castles">Castles</option>
+          <option value="Pools">Pools</option>
+          <option value="Camping">Camping</option>
+          <option value="Bed and Breakfast">Bed and Breakfast</option>
+          <option value="New">New</option>
+          <option value="Artic">Artic</option>
+          <option value="Chef's Kitchen">Chef's Kitchen</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label" style="font-size:0.95rem;">Image</label>
+        <input class="form-control" type="file" id="image" name="image">
+      </div>
+      <button type="submit" class="btn airbnb-btn w-100 mt-2" style="font-size:1rem;">Create Listing</button>
+    </form>
+  </div>
+</div>
+<style>
+  .airbnb-btn {
+    background: #f7f7f7;
+    color: #fe424d !important;
+    border: 1px solid #fe424d33;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.8;
+    transition: background 0.18s, color 0.18s, opacity 0.18s, border 0.18s;
+  }
+  .airbnb-btn:hover, .airbnb-btn:focus {
+    background: #fff;
+    color: #fe424d !important;
+    opacity: 1;
+    border: 1.5px solid #fe424d;
+    text-decoration: none;
+  }
+  .card {
+    border: none;
+  }
+  .form-label {
+    color: #555;
+  }
+</style>

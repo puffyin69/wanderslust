@@ -1,0 +1,111 @@
+<% layout("/layouts/boilerplate") -%>
+<style>
+    h1{
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 3rem;
+        opacity: 0.85;
+    }
+</style>
+<body>
+    <h1>Room Listings</h1>
+    <div id="filters">
+    <div class="filter" data-category="Trending">
+        <a href="/listings/Trending">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Room">
+        <a href="/listings/Room">
+            <div><i class="fa-solid fa-hotel"></i></div>
+            <p>Room</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Beach">
+        <a href="/listings/Beach">
+            <div><i class="fa-solid fa-umbrella-beach"></i></div>
+            <p>Beach</p>
+        </a>
+    </div>
+    <div class="filter" data-category="iconic cities">
+        <a href="/listings/iconiccities">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>iconic cities</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Mountain">
+        <a href="/listings/Mountain">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountain</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Castles">
+        <a href="/listings/Castles">
+            <div><i class="fa-solid fa-chess-rook"></i></div>
+            <p>Castles</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Pools">
+        <a href="/listings/Pools">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Pools</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Camping">
+        <a href="/listings/Camping">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Bed and Breakfast">
+        <a href="/listings/BedandBreakfast">
+            <div><i class="fa-solid fa-mug-saucer"></i></div>
+            <p>Bed and Breakfast</p>
+        </a>
+    </div>
+    <div class="filter" data-category="New">
+        <a href="/listings/Newfilter">
+            <div><i class="fa-solid fa-key"></i></div>
+            <p>New</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Artic">
+        <a href="/listings/Artic">
+            <div><i class="fa-solid fa-snowflake"></i></div>
+            <p>Artic</p>
+        </a>
+    </div>
+    <div class="filter" data-category="Chef's Kitchen">
+        <a href="/listings/Chef'sKitchen">
+            <div><i class="fa-solid fa-bowl-food"></i></div>
+            <p>Chef's Kitchen</p>
+        </a>
+    </div>
+    <br><hr><br>
+    <div class="container mt-4">
+        <div class="row">
+            <% if (listings && listings.length > 0) { %>
+                <% for (let i = 0; i < listings.length; i++) { 
+                    let listing = listings[i]; %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="<%= listing.image && listing.image.url ? listing.image.url : '/default.jpg' %>" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Listing image">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= listing.title %></h5>
+                                <p class="card-text"><b>Price:</b> <%= listing.price %></p>
+                                <p class="card-text"><b>Location:</b> <%= listing.location %></p>
+                                <p class="card-text"><b>Country:</b> <%= listing.country %></p>
+                                <a href="/listings/<%= listing._id %>" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <div class="col-12">
+                    <p>No listings found for this category.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>

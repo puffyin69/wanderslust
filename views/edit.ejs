@@ -1,0 +1,33 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow p-4" style="max-width: 500px; width: 100%; border-radius: 20px;">
+    <h3 class="mb-3 text-center" style="color:#444; font-weight:600; font-size:1.3rem;">Edit Listing</h3>
+    <form action="/listings/<%= editlt._id %>?_method=PUT" method="POST" enctype="multipart/form-data" autocomplete="off">
+      <div class="mb-3">
+        <label for="title" class="form-label" style="font-size:0.95rem;">Title</label>
+        <input type="text" class="form-control rounded-pill" id="title" name="title" value="<%= editlt.title %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label" style="font-size:0.95rem;">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required><%= editlt.description %></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label" style="font-size:0.95rem;">Price</label>
+        <input type="number" class="form-control rounded-pill" id="price" name="price" value="<%= editlt.price %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label" style="font-size:0.95rem;">Location</label>
+        <input type="text" class="form-control rounded-pill" id="location" name="location" value="<%= editlt.location && editlt.location.type ? editlt.location.type : editlt.location %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="country" class="form-label" style="font-size:0.95rem;">Country</label>
+        <input type="text" class="form-control rounded-pill" id="country" name="country" value="<%= editlt.country %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label" style="font-size:0.95rem;">Image</label>
+        <input class="form-control" type="file" id="image" name="image">
+      </div>
+      <button type="submit" class="btn airbnb-btn w-100 mt-2">Update Listing</button>
+    </form>
+  </div>
+</div>
