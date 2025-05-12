@@ -24,6 +24,24 @@
         <input type="text" class="form-control rounded-pill" id="country" name="country" value="<%= editlt.country %>" required>
       </div>
       <div class="mb-3">
+        <label for="category" class="form-label" style="font-size:0.95rem;">Category</label>
+        <select class="form-select rounded-pill" id="category" name="category" required>
+          <option value="">Select a category</option>
+          <option value="Trending" <%= editlt.category === "Trending" ? "selected" : "" %>>Trending</option>
+          <option value="Room" <%= editlt.category === "Room" ? "selected" : "" %>>Room</option>
+          <option value="Beach" <%= editlt.category === "Beach" ? "selected" : "" %>>Beach</option>
+          <option value="iconic cities" <%= editlt.category === "iconic cities" ? "selected" : "" %>>Iconic Cities</option>
+          <option value="Mountain" <%= editlt.category === "Mountain" ? "selected" : "" %>>Mountain</option>
+          <option value="Castles" <%= editlt.category === "Castles" ? "selected" : "" %>>Castles</option>
+          <option value="Pools" <%= editlt.category === "Pools" ? "selected" : "" %>>Pools</option>
+          <option value="Camping" <%= editlt.category === "Camping" ? "selected" : "" %>>Camping</option>
+          <option value="Bed and Breakfast" <%= editlt.category === "Bed and Breakfast" ? "selected" : "" %>>Bed and Breakfast</option>
+          <option value="New" <%= editlt.category === "New" ? "selected" : "" %>>New</option>
+          <option value="Artic" <%= editlt.category === "Artic" ? "selected" : "" %>>Artic</option>
+          <option value="Chef's Kitchen" <%= editlt.category === "Chef's Kitchen" ? "selected" : "" %>>Chef's Kitchen</option>
+        </select>
+      </div>
+      <div class="mb-3">
         <label for="image" class="form-label" style="font-size:0.95rem;">Image</label>
         <input class="form-control" type="file" id="image" name="image">
       </div>
