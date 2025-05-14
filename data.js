@@ -3,7 +3,7 @@ const Listing =require("./models/listing.js");
 const ObjectId = mongoose.Types.ObjectId;
 
 async function main(){
-  await mongoose.connect("mongodb://localhost:27017/wanderslust"); //wandershub
+  await mongoose.connect("mongodb+srv://kirtanthakkar30:XLL64oHMK8JweHde@cluster1.fwmjtkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1");
   console.log("connected to the database");
 }
 
@@ -368,20 +368,20 @@ let sampleListings = [
   owner: new ObjectId("68195ab2a9699cff1efb2a41"),
   category: "Trending",
 }));
-  // Listing.insertMany(sampleListings).then((res)=>{
-  //   console.log("data inserted successfully");
-  // }
-  // ).catch((err)=>{
-  //   console.log("an error occured");
-  //   console.log(err.message);
-  // })
-  Listing.deleteMany({}).then((res)=>{
-    console.log("data deleted successfully");
+  Listing.insertMany(sampleListings).then((res)=>{
+    console.log("data inserted successfully");
   }
   ).catch((err)=>{
     console.log("an error occured");
     console.log(err.message);
   })
+  // Listing.deleteMany({}).then((res)=>{
+  //   console.log("data deleted successfully");
+  // }
+  // ).catch((err)=>{
+  //   console.log("an error occured");
+  //   console.log(err.message);
+  // })
   
   
   
