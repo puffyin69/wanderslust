@@ -65,6 +65,10 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user; // or however you store the logged-in user
+    next();
+});
 
 
 // Middleware for flash messages (move this above all routes)
@@ -74,10 +78,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user; // or however you store the logged-in user
-    next();
-});
+
 
 // Database connection
 async function main() {
