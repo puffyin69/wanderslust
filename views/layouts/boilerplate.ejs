@@ -10,6 +10,72 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        .listing-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(60,60,60,0.07);
+  border: none;
+  transition: box-shadow 0.18s, transform 0.18s;
+  color: #222;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.listing-card:hover {
+  box-shadow: 0 6px 24px rgba(60,60,60,0.13);
+  transform: translateY(-4px) scale(1.015);
+}
+.listing-card-img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  background: #f7f7f7;
+  cursor: pointer;
+  transition: opacity 0.18s;
+}
+.listing-card-img:hover {
+  opacity: 0.85;
+}
+.listing-card-body {
+  padding: 1.2rem 1.3rem 1.1rem 1.3rem;
+}
+.listing-card-title {
+  font-size: 1.13rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.01em;
+}
+.listing-card-price {
+  color: #444;
+  font-weight: 600;
+  font-size: 1.01rem;
+  margin-bottom: 0.3rem;
+}
+        .listing-card-btn {
+          background: #233a5e;
+          color: #4f8cff !important;
+          border: none;
+          border-radius: 25px;
+          font-size: 0.97rem;
+          font-weight: 500;
+          opacity: 0.9;
+          width: 100%;
+          margin-top: 0.7rem;
+          transition: background 0.18s, color 0.18s, opacity 0.18s, box-shadow 0.18s;
+          box-shadow: 0 2px 8px rgba(79,140,255,0.07);
+        }
+        .listing-card-btn:hover, .listing-card-btn:focus {
+          background: #4f8cff;
+          color: #fff !important;
+          opacity: 1;
+          box-shadow: 0 4px 16px rgba(79,140,255,0.13);
+          text-decoration: none;
+        }
+    </style>
+</head>
 <body>
     <%- include("../includes/navbar.ejs") %>
 

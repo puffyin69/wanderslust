@@ -89,14 +89,13 @@
                 <% for (let i = 0; i < listings.length; i++) { 
                     let listing = listings[i]; %>
                     <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <img src="<%= listing.image && listing.image.url ? listing.image.url : '/default.jpg' %>" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Listing image">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= listing.title %></h5>
-                                <p class="card-text"><b>Price:</b> <%= listing.price.toLocaleString("en-IN") %></p>
-                                <p class="card-text"><b>Location:</b> <%= listing.location %></p>
-                                <p class="card-text"><b>Country:</b> <%= listing.country %></p>
-                                <a href="/listings/<%= listing._id %>" class="btn btn-primary">View Details</a>
+                        <div class="listing-card">
+                            <a href="/listings/<%= listing._id %>">
+                                <img src="<%= listing.image && listing.image.url ? listing.image.url : '/default.jpg' %>" class="listing-card-img" alt="Listing image">
+                            </a>
+                            <div class="listing-card-body">
+                                <div class="listing-card-title"><%= listing.title %></div>
+                                <div class="listing-card-price">₹<%= listing.price.toLocaleString("en-IN") %> / Night</div>
                             </div>
                         </div>
                     </div>

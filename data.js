@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
 const Listing =require("./models/listing.js");
+const ObjectId = mongoose.Types.ObjectId;
 
 async function main(){
   await mongoose.connect("mongodb://localhost:27017/wanderslust"); //wandershub
@@ -362,16 +363,29 @@ let sampleListings = [
       country: "Costa Rica",
     },
   ];
-  // Listing.insertMany(sampleListings).then((res)=>{
-  //   console.log("data inserted successfully");
+  sampleListings = sampleListings.map(listing => ({
+  ...listing,
+  owner: new ObjectId("68195ab2a9699cff1efb2a41"),
+  category: "Trending",
+}));
+  Listing.insertMany(sampleListings).then((res)=>{
+    console.log("data inserted successfully");
+  }
+  ).catch((err)=>{
+    console.log("an error occured");
+    console.log(err.message);
+  })
+  // Listing.deleteMany({}).then((res)=>{
+  //   console.log("data deleted successfully");
   // }
   // ).catch((err)=>{
   //   console.log("an error occured");
+  //   console.log(err.message);
   // })
   
   
+  
   module.exports = {data : sampleListings} ;
-
 
 
 

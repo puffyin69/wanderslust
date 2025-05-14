@@ -67,10 +67,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-
-
-
-
 // Middleware for flash messages (move this above all routes)
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
@@ -226,6 +222,7 @@ app.get(
 );
 app.get("/listings/Trending", async (req, res) => {
     let listings = await Listing.find({ category: "Trending" });
+    
     res.render("Trending.ejs", { listings });
 });
 app.get("/listings/Room",async(req,res)=>{
@@ -284,34 +281,17 @@ app.put(
             req.flash("error","You need to login first");
             return res.redirect("/login");
         }
+        if(!listing.owner._id.equals(res.locals.currentUser._id)){
+            req.flash("error","You are not authorized to edit this listing");
+            return res.redirect(`/listings/${id}`);
+        }
         // Update fields
         listing.title = req.body.title;
         listing.description = req.body.description;
         listing.price = req.body.price;
         listing.country = req.body.country;
         listing.category = req.body.category;
-
-        // Geocode if location changed
-        if (
-            req.body.location &&
-            typeof listing.location === "object" &&
-            req.body.location !== listing.location.type
-        ) {
-            let latitude = null, longitude = null;
-            try {
-                const geoRes = await axios.get(
-                    `https://api.maptiler.com/geocoding/${encodeURIComponent(req.body.location)}.json?key=${process.env.MAPTILER_KEY}`
-                );
-                if (geoRes.data.features && geoRes.data.features.length > 0) {
-                    [longitude, latitude] = geoRes.data.features[0].geometry.coordinates;
-                }
-            } catch (e) {
-                console.log("Geocoding failed:", e.message);
-            }
-            listing.location.type = req.body.location;
-            listing.location.latitude = latitude;
-            listing.location.longitude = longitude;
-        }
+        listing.owner = req.user._id;
 
         // If a new image is uploaded, update it
         if (req.file) {
@@ -343,6 +323,11 @@ app.delete(
     "/listings/:id",
     wrapAsync(async (req, res) => {
         let { id } = req.params;
+         let listing = await Listing.findById(id);
+        if(!listing.owner._id.equals(res.locals.currentUser._id)){
+            req.flash("error","You are not authorized to Delete this listing");
+            return res.redirect(`/listings/${id}`);
+        };
         await Listing.findByIdAndDelete(id);
         if(!id) {
             req.flash("error","Listing not found");
@@ -350,7 +335,8 @@ app.delete(
         if(!req.isAuthenticated()){
             req.flash("error","You need to login first");
             return res.redirect("/login");
-        }
+        }   
+        
         req.flash("error","Deleted review successfully");
         res.redirect("/listings");
     })
@@ -361,11 +347,16 @@ app.get(
     "/listings/:id",
     wrapAsync(async (req, res) => {
         let { id } = req.params;
-        const showlt = await Listing.findById(id).populate("reviews");
+        const showlt = await Listing.findById(id).populate({path:"reviews",populate:{
+            path:"author",
+            model:"User"
+        }}).populate("owner");
         if (!showlt) {
             throw new ExpressError(404, "Listing not found");
         }
         req.flash("success","Listing found successfully");
+
+        console.log(showlt);
 
         
         res.render("show.ejs", { showlt });
@@ -391,6 +382,8 @@ app.post(
             rating,
             comment,
         });
+        newReview.author = req.user._id; // Set the owner of the review to the current user
+        console.log(newReview);
         listing.reviews.push(newReview);
         await newReview.save();
         await listing.save();
@@ -404,12 +397,17 @@ app.delete(
     wrapAsync(async (req, res) => {
         const { id, reviewId } = req.params;
         const listing = await Listing.findById(id);
+        const review = await Review.findById(reviewId);
         if (!listing) {
             throw new ExpressError(404, "Listing not found");
         }
         if(!req.isAuthenticated()){
             req.flash("error","You need to login first");
             return res.redirect("/login");
+        }
+        if(!review.author._id.equals(res.locals.currentUser._id)){
+            req.flash("error","You are not authorized to delete this review");
+            return res.redirect(`/listings/${id}`);
         }
         await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
         await Review.findByIdAndDelete(reviewId);

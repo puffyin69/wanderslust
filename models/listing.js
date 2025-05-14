@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const Review = require("./reviews.js");
+const User = require("./user.js");
+
 async function main() {
     await mongoose.connect('mongodb+srv://kirtanthakkar30:XLL64oHMK8JweHde@cluster1.fwmjtkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1');
+
 }
 
 
@@ -49,7 +52,11 @@ const listingschema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Review"
         }
-    ]
+    ],  
+    owner:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 //post middle che je aagar koi listing delete thase toh eeni hare eena reviews bi badhaj delete kari nakse ekle code optimise thai gayo
 listingschema.post("findOneAndDelte",async(listing)=>{
