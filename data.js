@@ -368,20 +368,20 @@ let sampleListings = [
   owner: new ObjectId("68195ab2a9699cff1efb2a41"),
   category: "Trending",
 }));
-  Listing.insertMany(sampleListings).then((res)=>{
-    console.log("data inserted successfully");
-  }
-  ).catch((err)=>{
-    console.log("an error occured");
-    console.log(err.message);
-  })
-  // Listing.deleteMany({}).then((res)=>{
-  //   console.log("data deleted successfully");
+  // Listing.insertMany(sampleListings).then((res)=>{
+  //   console.log("data inserted successfully");
   // }
   // ).catch((err)=>{
   //   console.log("an error occured");
   //   console.log(err.message);
   // })
+  Listing.deleteMany({}).then((res)=>{
+    console.log("data deleted successfully");
+  }
+  ).catch((err)=>{
+    console.log("an error occured");
+    console.log(err.message);
+  })
   
   
   

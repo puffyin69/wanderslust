@@ -66,7 +66,10 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+}); 
 // Middleware for flash messages (move this above all routes)
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
@@ -74,10 +77,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user; // or however you store the logged-in user
-    next();
-});
 
 // Database connection
 async function main() {
@@ -347,11 +346,10 @@ app.delete(
 app.get(
     "/listings/:id",
     wrapAsync(async (req, res) => {
-        let { id } = req.params;
-        const showlt = await Listing.findById(id).populate({path:"reviews",populate:{
-            path:"author",
-            model:"User"
-        }}).populate("owner");
+        const showlt = await Listing.findById(req.params.id).populate("owner").populate({
+            path: "reviews",
+            populate: { path: "author" }
+        });
         if (!showlt) {
             throw new ExpressError(404, "Listing not found");
         }

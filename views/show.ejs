@@ -19,7 +19,10 @@
                     </p>
                     <p class="mb-1" style="color:#666;"><b>Country:</b> <%= showlt.country %></p>
                     <p class="mb-3" style="color:#666;"><b>Price:</b> ₹<%= showlt.price.toLocaleString("en-IN") %>/Night</p>
-                    <p class="mb-3" style="color:#666;"><b>Owner:</b><%= showlt.owner.username %></p>   
+                    <p class="mb-3" style="color:#666;">
+                      <b>Owner:</b>
+                      <%= showlt.owner && showlt.owner.username ? showlt.owner.username : "Unknown" %>
+                    </p>   
                     <p class="mb-3" style="color:#555;"><%= showlt.description %></p>
                 
                         <div class="mb-3 d-flex gap-2">
