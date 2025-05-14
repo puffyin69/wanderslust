@@ -42,7 +42,7 @@
     <hr class="my-5">
     <div class="col-6 offset-3">
         <h4 class="mb-3" style="color:#444; font-weight:600;">Leave a Review</h4>
-        <% if(currentUser) {%>
+        <% if(res.locals.currentUser) {%>
         <form action="/listings/<%=showlt._id%>/reviews" method="post" novalidate class="needs-validation mb-4">
             <div class="mb-3">
                 <label for="rating" class="form-label">Rating</label>
@@ -60,7 +60,7 @@
             </div>
             <button type="submit" class="btn btn-primary w-100 mt-2" style="font-size:1rem;">Submit</button>
         </form>
-        <%}else if (!currentUser) {%>
+        <%}else if (!res.locals.currentUser) {%>
             <div class="alert alert-warning " role="alert">
                 You need to be logged in to leave a review!
             </div>
