@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 async function main() {
     await mongoose.connect('mongodb+srv://kirtanthakkar30:XLL64oHMK8JweHde@cluster1.fwmjtkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1');
+    // await mongoose.connect("mongodb://localhost:27017/wanderslust");
 }
 
 

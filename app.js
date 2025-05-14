@@ -65,10 +65,6 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user; // or however you store the logged-in user
-    next();
-});
 
 
 // Middleware for flash messages (move this above all routes)
@@ -78,11 +74,15 @@ app.use((req, res, next) => {
     next();
 });
 
-
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user; // or however you store the logged-in user
+    next();
+});
 
 // Database connection
 async function main() {
     await mongoose.connect("mongodb+srv://kirtanthakkar30:XLL64oHMK8JweHde@cluster1.fwmjtkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1");
+    // await mongoose.connect("mongodb://localhost:27017/wanderslust");
 }
 main()
     .then(() => {
@@ -406,7 +406,7 @@ app.delete(
             req.flash("error","You need to login first");
             return res.redirect("/login");
         }
-        if(!review.author._id.equals(res.locals.currentUser._id)){
+        if(!reviews.author._id.equals(res.locals.currentUser._id)){
             req.flash("error","You are not authorized to delete this review");
             return res.redirect(`/listings/${id}`);
         }

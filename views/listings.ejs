@@ -89,16 +89,15 @@
             <% if (listings && listings.length > 0) { %>
                 <% listings.forEach(listing => { %>
                     <div class="col-md-4">
-                      <div class="listing-card">
-                        <img src="<%= listing.image && listing.image.url ? listing.image.url : '/default.jpg' %>" class="listing-card-img" alt="Listing image">
-                        <div class="listing-card-body">
-                          <div class="listing-card-title"><%= listing.title %></div>
-                          <div class="listing-card-text"><b>Location:</b> <%= listing.location %></div>
-                          <div class="listing-card-text"><b>Country:</b> <%= listing.country %></div>
-                          <div class="listing-card-price">₹<%= listing.price.toLocaleString("en-IN") %> / Night</div>
-                          <a href="/listings/<%= listing._id %>" class="btn listing-card-btn">View Details</a>
+                        <div class="listing-card">
+                            <a href="/listings/<%= listing._id %>">
+                                <img src="<%= listing.image && listing.image.url ? listing.image.url : '/default.jpg' %>" class="listing-card-img" alt="Listing image">
+                            </a>
+                            <div class="listing-card-body">
+                                <div class="listing-card-title"><%= listing.title %></div>
+                                <div class="listing-card-price">₹<%= listing.price.toLocaleString("en-IN") %> / Night</div>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 <% }) %>
             <% } else { %>  

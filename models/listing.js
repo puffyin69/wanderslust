@@ -4,7 +4,8 @@ const User = require("./user.js");
 
 async function main() {
     await mongoose.connect('mongodb+srv://kirtanthakkar30:XLL64oHMK8JweHde@cluster1.fwmjtkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1');
-
+    // await mongoose.connect('mongodb://127.0.0.1:27017/test')
+    //   .then(() => console.log('Connected!'))
 }
 
 
