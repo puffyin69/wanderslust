@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const Listing =require("./models/listing.js");
 const ObjectId = mongoose.Types.ObjectId;
+const User = require("./models/user.js");
 
 async function main(){
   await mongoose.connect("mongodb+srv://kirtanthakkar30:XLL64oHMK8JweHde@cluster1.fwmjtkj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1");
@@ -25,7 +26,8 @@ let sampleListings = [
       },
       price: 1500,
       location: "Malibu",
-      country: "United States"
+      country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Modern Loft in Downtown",
@@ -38,6 +40,7 @@ let sampleListings = [
       price: 1200,
       location: "New York City",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Mountain Retreat",
@@ -50,6 +53,7 @@ let sampleListings = [
       price: 1000,
       location: "Aspen",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Historic Villa in Tuscany",
@@ -62,6 +66,7 @@ let sampleListings = [
       price: 2500,
       location: "Florence",
       country: "Italy",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Secluded Treehouse Getaway",
@@ -74,6 +79,7 @@ let sampleListings = [
       price: 800,
       location: "Portland",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Beachfront Paradise",
@@ -86,6 +92,7 @@ let sampleListings = [
       price: 2000,
       location: "Cancun",
       country: "Mexico",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Rustic Cabin by the Lake",
@@ -98,6 +105,7 @@ let sampleListings = [
       price: 900,
       location: "Lake Tahoe",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Luxury Penthouse with City Views",
@@ -110,6 +118,7 @@ let sampleListings = [
       price: 3500,
       location: "Los Angeles",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Ski-In/Ski-Out Chalet",
@@ -122,6 +131,7 @@ let sampleListings = [
       price: 3000,
       location: "Verbier",
       country: "Switzerland",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Safari Lodge in the Serengeti",
@@ -134,6 +144,7 @@ let sampleListings = [
       price: 4000,
       location: "Serengeti National Park",
       country: "Tanzania",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Historic Canal House",
@@ -146,6 +157,7 @@ let sampleListings = [
       price: 1800,
       location: "Amsterdam",
       country: "Netherlands",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Private Island Retreat",
@@ -158,6 +170,7 @@ let sampleListings = [
       price: 10000,
       location: "Fiji",
       country: "Fiji",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Charming Cottage in the Cotswolds",
@@ -170,6 +183,7 @@ let sampleListings = [
       price: 1200,
       location: "Cotswolds",
       country: "United Kingdom",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Historic Brownstone in Boston",
@@ -182,6 +196,7 @@ let sampleListings = [
       price: 2200,
       location: "Boston",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Beachfront Bungalow in Bali",
@@ -194,6 +209,7 @@ let sampleListings = [
       price: 1800,
       location: "Bali",
       country: "Indonesia",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Mountain View Cabin in Banff",
@@ -206,6 +222,7 @@ let sampleListings = [
       price: 1500,
       location: "Banff",
       country: "Canada",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Art Deco Apartment in Miami",
@@ -218,6 +235,7 @@ let sampleListings = [
       price: 1600,
       location: "Miami",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Tropical Villa in Phuket",
@@ -230,6 +248,7 @@ let sampleListings = [
       price: 3000,
       location: "Phuket",
       country: "Thailand",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Historic Castle in Scotland",
@@ -242,6 +261,7 @@ let sampleListings = [
       price: 4000,
       location: "Scottish Highlands",
       country: "United Kingdom",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Desert Oasis in Dubai",
@@ -254,6 +274,7 @@ let sampleListings = [
       price: 5000,
       location: "Dubai",
       country: "United Arab Emirates",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Rustic Log Cabin in Montana",
@@ -266,6 +287,7 @@ let sampleListings = [
       price: 1100,
       location: "Montana",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Beachfront Villa in Greece",
@@ -278,6 +300,7 @@ let sampleListings = [
       price: 2500,
       location: "Mykonos",
       country: "Greece",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Eco-Friendly Treehouse Retreat",
@@ -290,6 +313,7 @@ let sampleListings = [
       price: 750,
       location: "Costa Rica",
       country: "Costa Rica",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Historic Cottage in Charleston",
@@ -302,6 +326,7 @@ let sampleListings = [
       price: 1600,
       location: "Charleston",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Modern Apartment in Tokyo",
@@ -314,6 +339,7 @@ let sampleListings = [
       price: 2000,
       location: "Tokyo",
       country: "Japan",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Lakefront Cabin in New Hampshire",
@@ -325,6 +351,7 @@ let sampleListings = [
       price: 1200,
       location: "New Hampshire",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Luxury Villa in the Maldives",
@@ -337,6 +364,7 @@ let sampleListings = [
       price: 6000,
       location: "Maldives",
       country: "Maldives",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Ski Chalet in Aspen",
@@ -349,6 +377,7 @@ let sampleListings = [
       price: 4000,
       location: "Aspen",
       country: "United States",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
     {
       title: "Secluded Beach House in Costa Rica",
@@ -361,11 +390,11 @@ let sampleListings = [
       price: 1800,
       location: "Costa Rica",
       country: "Costa Rica",
+      owner: new ObjectId("68195ab2a9699cff1efb2a41")
     },
   ];
   sampleListings = sampleListings.map(listing => ({
   ...listing,
-  owner: new ObjectId("68195ab2a9699cff1efb2a41"),
   category: "Trending",
 }));
   Listing.insertMany(sampleListings).then((res)=>{
@@ -375,6 +404,7 @@ let sampleListings = [
     console.log("an error occured");
     console.log(err.message);
   })
+
   // Listing.deleteMany({}).then((res)=>{
   //   console.log("data deleted successfully");
   // }
